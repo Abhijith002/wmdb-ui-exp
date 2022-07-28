@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -6,11 +10,65 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.stack {
+  margin: 20px auto;
+  width: 400px;
+  padding: 0;
+  position: relative;
+  max-width: 100%;
 }
 
-* {
-  box-sizing: border-box;
+.stack img {
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  outline: 1px solid transparent;
+}
+
+.stack img:last-child {
+  position: relative;
+}
+
+.stack-sideslide img:first-child,
+.stack-sideslide img:nth-child(2) {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s, visibility 0s 0.3s;
+  transition: transform 0.3s, opacity 0.3s, visibility 0s 0.3s;
+}
+
+.stack-sideslide img:first-child {
+  -webkit-transform: translateX(-50%) scale(0.6);
+  transform: translateX(-50%) scale(0.6);
+}
+
+.stack-sideslide img:nth-child(2) {
+  -webkit-transform: translateX(50%) scale(0.6);
+  transform: translateX(50%) scale(0.6);
+}
+
+.stack-sideslide.active img:nth-child(3) {
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+}
+
+.stack-sideslide.active img:first-child,
+.stack-sideslide.active img:nth-child(2) {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.stack-sideslide.active img:first-child {
+  -webkit-transform: translateX(-20%) scale(0.8);
+  transform: translateX(-20%) scale(0.8);
+}
+
+.stack-sideslide.active img:nth-child(2) {
+  -webkit-transform: translateX(20%) scale(0.8);
+  transform: translateX(20%) scale(0.8);
 }
