@@ -7,11 +7,13 @@ import Header from "../components/header";
 import NewHeader from "../components/header2";
 
 export default function Home() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   return (
     <AnimateSharedLayout type="crossfade">
-      <AnimatePresence>{loading ? <Loader /> : <Header />}</AnimatePresence>
+      <AnimatePresence>
+        {loading ? <Loader setLoading={setLoading} /> : <Header />}
+      </AnimatePresence>
     </AnimateSharedLayout>
   );
 }

@@ -12,12 +12,14 @@ import star from "/public/images/star-wars.webp";
 import star2 from "/public/images/star-wars2.webp";
 import lion from "/public/images/the-lion-king.webp";
 import lord from "/public/images/the-lord-of-the-rings.webp";
+import john from "/public/images/john.webp";
+import gravity from "/public/images/gravity.webp";
 // Import images
 
 const container = {
   show: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.35,
     },
   },
 };
@@ -82,12 +84,12 @@ export const ImageBlock = ({
   );
 };
 
-export default function Loader() {
+export default function Loader({ setLoading }) {
   return (
     <motion.div className="overflow-hidden h-screen">
       <motion.div
         variants={container}
-        // onAnimationComplete={() => setLoading(false)}
+        onAnimationComplete={() => setLoading(false)}
         initial="hidden"
         animate="show"
         exit="exit"
@@ -98,16 +100,12 @@ export default function Loader() {
           name="joker"
           classes="w-[400px] left-[16%] bottom-[14%]"
         />
-        <motion.div
-          variants={itemMain}
-          className="absolute top-0 left-0 h-screen w-screen flex items-center justify-center"
-        >
-          <motion.img
-            className="w-[400px] flex"
-            layoutId="main-image-1"
-            src="/images/john.webp"
-          />
-        </motion.div>
+        <ImageBlock
+          classes="w-[400px] left-[5%] top-[30%]"
+          variants={item}
+          id={john}
+          name="john"
+        />
         <ImageBlock
           variants={item}
           id={suicide}
@@ -174,6 +172,16 @@ export default function Loader() {
           name="lion"
           classes="w-[400px] left-[20%] bottom-[6%]"
         />
+        <motion.div
+          variants={itemMain}
+          className="absolute top-0 left-0 h-screen w-screen flex items-center justify-center"
+        >
+          <motion.img
+            className="w-[600px] flex"
+            layoutId="main-image-1"
+            src="/images/gravity.webp"
+          />
+        </motion.div>
       </motion.div>
     </motion.div>
   );

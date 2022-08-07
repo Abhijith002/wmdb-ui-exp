@@ -3,6 +3,60 @@ import { AnimatePresence, motion, useTime } from "framer-motion";
 import { useState } from "react";
 
 export default function Header() {
+  // Slider images
+  const imgData = [
+    {
+      url: "/images/bahubali.webp",
+      initial: { scale: 0.9, x: "60%", zIndex: 1 },
+    },
+    {
+      url: "/images/interstellar.webp",
+      initial: { scale: 0.9, x: "40%", zIndex: 2 },
+    },
+    {
+      url: "/images/skyfall.webp",
+      initial: { scale: 0.9, x: "20%", zIndex: 3 },
+    },
+    { url: "/images/gravity.webp", initial: { scale: 1, x: "0%", zIndex: 10 } },
+    {
+      url: "/images/tron.webp",
+      initial: { scale: 0.9, x: "-20%", zIndex: 3 },
+    },
+    {
+      url: "/images/worldwar.webp",
+      initial: { scale: 0.9, x: "-40%", zIndex: 2 },
+    },
+    {
+      url: "/images/inglourious-basterds.webp",
+      initial: { scale: 0.9, x: "-60%", zIndex: 1 },
+    },
+  ];
+
+  // Slider image next states
+  const [animStates, setAnimStates] = useState([
+    {
+      next: { scale: 0.9, x: "-60%", zIndex: 0 },
+    },
+    {
+      next: { scale: 0.9, x: "60%", zIndex: 1 },
+    },
+    {
+      next: { scale: 0.9, x: "40%", zIndex: 2 },
+    },
+    {
+      next: { scale: 0.9, x: "20%", zIndex: 3 },
+    },
+    {
+      next: { scale: 1, x: "0%", zIndex: 10 },
+    },
+    {
+      next: { scale: 0.9, x: "-20%", zIndex: 3 },
+    },
+    {
+      next: { scale: 0.9, x: "-40%", zIndex: 2 },
+    },
+  ]);
+
   const [animItem, setAnimItem] = useState({
     scale: 0.75,
     x: "-50%",
@@ -15,31 +69,63 @@ export default function Header() {
   });
   const [animItem2, setAnimItem2] = useState({ scale: 1, x: "0%", zIndex: 10 });
 
-  const determineVariants = (itm) => {
-    if (itm.x == "0%") {
-      return { scale: 0.75, x: "50%", zIndex: 0 };
+  // Calculate next state of the image slider
+  const determineVariants = (itm, index) => {
+    let val = { scale: 0.9, x: "-60%", zIndex: index };
+    if (itm.next.x == "60%") {
+      val.zIndex = 0;
+      return val;
+    } else {
+      val = {
+        scale: 0.9,
+        x: (parseInt(itm.next.x) + 20).toString() + "%",
+        zIndex:
+          parseInt(itm.next.x) + 20 > 0
+            ? itm.next.zIndex - 1
+            : itm.next.zIndex + 1,
+      };
     }
-    if (itm.x == "50%") {
-      return { scale: 0.75, x: "-50%", zIndex: 0 };
+
+    if (val.x == "0%") {
+      val.scale = 1;
+      val.zIndex = 10;
     }
-    if (itm.x == "-50%") {
-      return { scale: 1, x: "0%", zIndex: 10 };
-    }
+    return val;
   };
+
+  // Animation complete handler
   const handleAnimItem = (definition, name) => {
-    if (name == "widow") {
-      let itm = determineVariants(animItem);
-      setAnimItem(itm);
-    }
-    if (name == "john") {
-      let itm = determineVariants(animItem1);
-      setAnimItem1(itm);
-    }
-    if (name == "lion") {
-      let itm = determineVariants(animItem2);
-      setAnimItem2(itm);
-    }
+    setAnimStates(
+      animStates.map((anim, ind) => {
+        let itm = determineVariants(anim, ind);
+        return { next: itm };
+      })
+    );
   };
+
+  // Images div
+  const images = imgData.map((value, index) => {
+    return (
+      <motion.img
+        className="max-w-full absolute last:relative top-0 left-0 transition-all outline-1 outline outline-transparent shadow-2xl rounded-3xl"
+        initial={value.initial}
+        animate={animStates[index].next}
+        onAnimationComplete={(definition) =>
+          handleAnimItem(definition, value, index)
+        }
+        transition={{
+          duration: 5,
+          ease: "easeInOut",
+          delay: 2,
+        }}
+        src={value.url}
+        // layoutId={index === 3 ? "main-image-1" : ""}
+        alt={"img" + index}
+        key={"img" + index}
+      />
+    );
+  });
+
   return (
     <div className="bg-white lg:pb-12">
       <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
@@ -118,52 +204,8 @@ export default function Header() {
 
         <div className="w-full hidden lg:block bg-gray-50 border rounded-lg shadow-sm overflow-hidden">
           <section className="flex items-center justify-center">
-            <motion.div className="my-5 mx-auto w-[400px] p-0 relative max-w-full inline-grid place-items-center items-end">
-              <motion.img
-                className="max-w-full absolute top-0 left-0 transition-all outline-1 outline outline-transparent"
-                initial={{ scale: 0.75, x: "50%", zIndex: 0 }}
-                animate={animItem}
-                onAnimationComplete={(definition) =>
-                  handleAnimItem(definition, "widow")
-                }
-                transition={{
-                  duration: 5,
-                  ease: "easeInOut",
-                  delay: 2,
-                }}
-                src="/images/black-widow.webp"
-                alt="img06"
-              />
-              <motion.img
-                className="max-w-full absolute top-0 left-0 transition-all outline-1 outline outline-transparent z-10"
-                initial={{ scale: 1, x: "0%", zIndex: 10 }}
-                animate={animItem1}
-                onAnimationComplete={(definition) =>
-                  handleAnimItem(definition, "john")
-                }
-                transition={{
-                  duration: 5,
-                  ease: "easeInOut",
-                  delay: 2,
-                }}
-                src="/images/john.webp"
-                alt="img04"
-              />
-              <motion.img
-                className="max-w-full top-0 left-0 transition-all outline-1 outline outline-transparent"
-                initial={{ scale: 0.75, x: "-50%", zIndex: 0 }}
-                animate={animItem2}
-                onAnimationComplete={(definition) =>
-                  handleAnimItem(definition, "lion")
-                }
-                transition={{
-                  duration: 5,
-                  ease: "easeInOut",
-                  delay: 2,
-                }}
-                src="/images/the-lion-king.webp"
-                alt="img05"
-              />
+            <motion.div className="my-5 mx-auto w-[650px] p-0 relative max-w-full inline-grid place-items-center items-end">
+              {images}
             </motion.div>
           </section>
         </div>
