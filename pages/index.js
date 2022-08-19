@@ -1,19 +1,30 @@
-import Head from "next/head";
-import Image from "next/image";
-import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Loader from "../components/loader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/header";
-import NewHeader from "../components/header2";
+import MovieCards from "../components/movieCards";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    loading
+      ? document.querySelector("body").classList.add("loading")
+      : document.querySelector("body").classList.remove("loading");
+  }, [loading]);
+
   return (
-    <AnimateSharedLayout type="crossfade">
-      <AnimatePresence>
-        {loading ? <Loader setLoading={setLoading} /> : <Header />}
-      </AnimatePresence>
-    </AnimateSharedLayout>
+    <AnimatePresence exitBeforeEnter>
+      {loading ? (
+        <motion.div key="loader">
+          <Loader setLoading={setLoading} />
+        </motion.div>
+      ) : (
+        <>
+          <Header />
+          <MovieCards />
+        </>
+      )}
+    </AnimatePresence>
   );
 }

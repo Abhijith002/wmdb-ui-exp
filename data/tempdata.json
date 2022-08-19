@@ -1,0 +1,52 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "name": "John Wick",
+      "releaseYear": "2014",
+      "imgURL": "/images/john.webp"
+    },
+    {
+      "id": 2,
+      "name": "Black Widow",
+      "releaseYear": "2021",
+      "imgURL": "/images/black-widow.webp"
+    },
+    {
+      "id": 3,
+      "name": "Joker",
+      "releaseYear": "2019",
+      "imgURL": "/images/joker.webp"
+    },
+    {
+      "id": 4,
+      "name": "TRON: Legacy",
+      "releaseYear": "2010",
+      "imgURL": "/images/tron.webp"
+    },
+    {
+      "id": 5,
+      "name": "2001: A Space Odyssey",
+      "releaseYear": "1968",
+      "imgURL": "/images/2001-a-space-odyssey.webp"
+    },
+    {
+      "id": 6,
+      "name": "Avengers: Endgame",
+      "releaseYear": "2019",
+      "imgURL": "/images/avengers-endgame.webp"
+    },
+    {
+      "id": 7,
+      "name": "Godzilla: King of the Monsters",
+      "releaseYear": "2019",
+      "imgURL": "/images/godzilla.webp"
+    },
+    {
+      "id": 8,
+      "name": "Godzilla vs. Kong",
+      "releaseYear": "2021",
+      "imgURL": "/images/godzilla-vs-kong.webp"
+    }
+  ]
+}
