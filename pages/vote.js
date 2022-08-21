@@ -4,7 +4,7 @@ import { votecount } from "../utils/votecount";
 import { voteProposal } from "../utils/voteproposal";
 import { queueAndExecute } from "../utils/queueandexecute";
 
-export default function vote() {
+export default function Vote() {
   const [data, setData] = useState([]);
   const [modalState, setModalState] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState({});
