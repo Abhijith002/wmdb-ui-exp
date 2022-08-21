@@ -18,7 +18,6 @@ export default function Propose() {
   };
   const handleSubmit = async (event) => {
     // Stop the form from submitting and refreshing the page.
-
     event.preventDefault();
     setLoading(true);
 
