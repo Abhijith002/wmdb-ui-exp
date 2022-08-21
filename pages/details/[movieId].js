@@ -1,9 +1,8 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import ActualHeader from "../../components/actualHeader";
 import { movies } from "../../data/tempdata.json";
 
-export default function () {
+export default function MovieDetails() {
   const router = useRouter();
   const { movieId } = router.query;
   return (
@@ -21,10 +20,9 @@ export default function () {
               <div className="space-y-4">
                 <div className="w-[90%] bg-gray-100 rounded-lg overflow-hidden relative">
                   <img
-                    // src="https://images.unsplash.com/flagged/photo-1571366992942-be878c7b10c0?auto=format&q=75&fit=crop&w=600"
                     src={
-                      movies[parseInt(movieId)] !== undefined
-                        ? movies[parseInt(movieId)].imgURL
+                      movies[parseInt(movieId) - 1] !== undefined
+                        ? movies[parseInt(movieId) - 1].imgURL
                         : movies[0].imgURL
                     }
                     loading="lazy"
@@ -40,13 +38,13 @@ export default function () {
               <div className="md:py-8">
                 <div className="mb-2 md:mb-3">
                   <span className="inline-block text-gray-500 mb-0.5">
-                    {movies[parseInt(movieId)] !== undefined
-                      ? movies[parseInt(movieId)].releaseYear
+                    {movies[parseInt(movieId) - 1] !== undefined
+                      ? movies[parseInt(movieId) - 1].releaseYear
                       : movies[0].releaseYear}
                   </span>
                   <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold">
-                    {movies[parseInt(movieId)] !== undefined
-                      ? movies[parseInt(movieId)].name
+                    {movies[parseInt(movieId) - 1] !== undefined
+                      ? movies[parseInt(movieId) - 1].name
                       : movies[0].name}
                   </h2>
                 </div>
@@ -138,11 +136,23 @@ export default function () {
                     />
                   </svg> */}
 
-                  <span className="text-sm">Joaquin Phoenix</span>
-                  <div class="divider divider-horizontal"></div>
-                  <span className="text-sm">Robert De Niro</span>
-                  <div class="divider divider-horizontal"></div>
-                  <span className="text-sm"> Zazie Beetz</span>
+                  <span className="text-sm">
+                    {movies[parseInt(movieId) - 1] !== undefined
+                      ? movies[parseInt(movieId) - 1].cast[0]
+                      : movies[0].cast[0]}
+                  </span>
+                  <div className="divider divider-horizontal"></div>
+                  <span className="text-sm">
+                    {movies[parseInt(movieId) - 1] !== undefined
+                      ? movies[parseInt(movieId) - 1].cast[1]
+                      : movies[0].cast[1]}
+                  </span>
+                  <div className="divider divider-horizontal"></div>
+                  <span className="text-sm">
+                    {movies[parseInt(movieId) - 1] !== undefined
+                      ? movies[parseInt(movieId) - 1].cast[2]
+                      : movies[0].cast[2]}
+                  </span>
                 </div>
                 <div className="flex gap-2.5">
                   <a
@@ -164,9 +174,9 @@ export default function () {
                       stroke="currentColor"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                       />
                     </svg>
@@ -178,16 +188,9 @@ export default function () {
                   </div>
 
                   <p className="text-gray-500">
-                    This is a section of some simple filler text, also known as
-                    placeholder text. It shares some characteristics of a real
-                    written text but is random or otherwise generated. It may be
-                    used to display a sample of fonts or generate text for
-                    testing.
-                    <br />
-                    <br />
-                    This is a section of some simple filler text, also known as
-                    placeholder text. It shares some characteristics of a real
-                    written text but is random or otherwise generated.
+                    {movies[parseInt(movieId)] !== undefined
+                      ? movies[parseInt(movieId) - 1].plot
+                      : movies[0].plot}
                   </p>
                 </div>
               </div>

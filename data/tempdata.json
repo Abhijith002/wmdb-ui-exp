@@ -4,49 +4,65 @@
       "id": 1,
       "name": "John Wick",
       "releaseYear": "2014",
-      "imgURL": "/images/john.webp"
+      "imgURL": "/images/john.webp",
+      "cast": ["Keanu Reeves", "Michael Nyqvist", "Alfie Allen"],
+      "plot": "An ex-hit-man comes out of retirement to track down the gangsters that killed his dog and took everything from him."
     },
     {
       "id": 2,
       "name": "Black Widow",
       "releaseYear": "2021",
-      "imgURL": "/images/black-widow.webp"
+      "imgURL": "/images/black-widow.webp",
+      "cast": ["Scarlett Johansson", "Florence Pugh", "Rachel Weisz"],
+      "plot": "Natasha Romanoff confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises."
     },
     {
       "id": 3,
       "name": "Joker",
       "releaseYear": "2019",
-      "imgURL": "/images/joker.webp"
+      "imgURL": "/images/joker.webp",
+      "cast": ["Joaquin Phoenix", "Robert De Niro", "Zazie Beetz"],
+      "plot": "A mentally troubled stand-up comedian embarks on a downward spiral that leads to the creation of an iconic villain."
     },
     {
       "id": 4,
       "name": "TRON: Legacy",
       "releaseYear": "2010",
-      "imgURL": "/images/tron.webp"
+      "imgURL": "/images/tron.webp",
+      "cast": ["Jeff Bridges", "Garrett Hedlund", "Olivia Wilde"],
+      "plot": "The son of a virtual world designer goes looking for his father and ends up inside the digital world that his father designed. He meets his father's corrupted creation and a unique ally who was born inside the digital world."
     },
     {
       "id": 5,
       "name": "2001: A Space Odyssey",
       "releaseYear": "1968",
-      "imgURL": "/images/2001-a-space-odyssey.webp"
+      "imgURL": "/images/2001-a-space-odyssey.webp",
+      "cast": ["Keir Dullea", "Gary Lockwood", "William Sylvester"],
+      "plot": "After uncovering a mysterious artifact buried beneath the Lunar surface, a spacecraft is sent to Jupiter to find its origins - a spacecraft manned by two men and the supercomputer H.A.L. 9000."
     },
     {
       "id": 6,
       "name": "Avengers: Endgame",
       "releaseYear": "2019",
-      "imgURL": "/images/avengers-endgame.webp"
+      "imgURL": "/images/avengers-endgame.webp",
+      "cast": ["Robert Downey Jr.", "Chris Evans", "Mark Ruffalo"],
+      "plot": "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe."
     },
     {
       "id": 7,
       "name": "Godzilla: King of the Monsters",
       "releaseYear": "2019",
-      "imgURL": "/images/godzilla.webp"
+      "imgURL": "/images/godzilla.webp",
+      "cast": ["Kyle Chandler", "Vera Farmiga", "Millie Bobby Brown"],
+      "plot": "The crypto-zoological agency Monarch faces off against a battery of god-sized monsters, including the mighty Godzilla, who collides with Mothra, Rodan, and his ultimate nemesis, the three-headed King Ghidorah."
     },
     {
       "id": 8,
       "name": "Godzilla vs. Kong",
       "releaseYear": "2021",
-      "imgURL": "/images/godzilla-vs-kong.webp"
+      "imgURL": "/images/godzilla-vs-kong.webp",
+      "cast": ["Alexander Skarsgård", "Millie Bobby Brown", "Rebecca Hall"],
+      "plot": "The epic next chapter in the cinematic Monsterverse pits two of the greatest icons in motion picture history against each other--the fearsome Godzilla and the mighty Kong--with humanity caught in the balance."
     }
   ]
 }

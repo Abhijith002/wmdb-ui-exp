@@ -1,6 +1,5 @@
 import { IncomingForm } from "formidable";
 import { Web3Storage, getFilesFromPath } from "web3.storage";
-import { Blob } from "buffer";
 import * as fs from "fs";
 
 function getAccessToken() {
@@ -61,9 +60,16 @@ export default async function handler(req, res) {
     const filesData = await getFilesFromPath(
       result.files.movieIMG.newFilename + "data"
     );
+
     const files = filesImg.concat(filesData);
     console.log(files);
     let fileCID = await storeFiles(files);
+    fs.unlink(result.files.movieIMG.newFilename + "data", (err) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+    });
     res.status(200).json({ fileCID: fileCID });
     // res.status(200).json({ fileCID: "fileCID " });
   }

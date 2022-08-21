@@ -1,27 +1,15 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import ActualHeader from "../components/actualHeader";
 import SvgComponent from "../components/additionImage";
+import { propose } from "../utils/propose";
 
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 export default function Propose() {
+  const router = useRouter();
   const [imgAdded, setImageAdded] = useState(false);
   const [imgPath, setImgPath] = useState("");
   const [loading, setLoading] = useState(false);
+  const [toastText, setToastText] = useState("Creating CIDs");
   const handleImgChange = (event) => {
     setImageAdded(true);
     console.log(event.target.files);
@@ -70,8 +58,39 @@ export default function Propose() {
     // If server returns the name submitted, that means the form works.
     const result = await response.json();
     console.log(result);
-    // alert(`Is this your full name: ${result.data}`);
+    setToastText("Proposing new addition");
+    let proposalId = "";
+    let proposalState = 1;
+    await propose([result.fileCID], "store", data.name)
+      .then((value) => {
+        console.log("proposed");
+        console.log(value);
+        proposalId = value.proposalId;
+        proposalState = value.proposalState;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    setToastText("Saving proposal");
+    console.log(proposalId, proposalState);
+    const prpdata = {
+      proposalid: proposalId,
+      cid: result.fileCID,
+      state: proposalState,
+    };
+    const JSONprpdata = JSON.stringify(prpdata);
+    const endpointaws = "/api/addtodb";
+    const optionsadddb = {
+      // The method is POST because we are sending data.
+      method: "POST",
+      body: JSONprpdata,
+    };
+    const responseaws = await fetch(endpointaws, optionsadddb);
+    const resultaws = await responseaws.json();
+    console.log(resultaws);
     setLoading(false);
+    setToastText("Creating CIDs");
+    router.push("/vote");
   };
 
   return (
@@ -100,7 +119,7 @@ export default function Propose() {
               ></path>
             </svg>
             <div>
-              <span>Creating CIDs.</span>
+              <span>{toastText}</span>
             </div>
           </div>
         </div>

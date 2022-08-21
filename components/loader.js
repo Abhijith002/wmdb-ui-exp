@@ -88,7 +88,10 @@ export default function Loader({ setLoading }) {
     <motion.div className="overflow-hidden h-screen">
       <motion.div
         variants={container}
-        onAnimationComplete={() => setLoading(false)}
+        onAnimationComplete={() => {
+          setLoading(false);
+          window.localStorage.setItem("loaded", true);
+        }}
         initial="hidden"
         animate="show"
         exit="exit"
