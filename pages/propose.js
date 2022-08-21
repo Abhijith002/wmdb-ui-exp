@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import ActualHeader from "../components/actualHeader";
 import SvgComponent from "../components/additionImage";
 import { propose } from "../utils/propose";
+import { Web3Storage } from "web3.storage";
 
 export default function Propose() {
   const router = useRouter();
@@ -16,13 +17,15 @@ export default function Propose() {
     setImgPath(event.target.files[0]);
   };
   const handleSubmit = async (event) => {
-    setLoading(true);
     // Stop the form from submitting and refreshing the page.
+
     event.preventDefault();
+    setLoading(true);
 
-    let formData = new FormData();
+    const client = new Web3Storage({
+      token: process.env.NEXT_PUBLIC_WEB3STORAGE_TOKEN,
+    });
 
-    // Get data from the form.
     const data = {
       name: event.target.name.value,
       releaseYear: event.target.release.value,
@@ -30,38 +33,22 @@ export default function Propose() {
       cast: event.target.cast.value,
     };
 
-    // Send the data to the server in JSON format.
     const JSONdata = JSON.stringify(data);
 
-    formData.append("data", JSONdata);
-    formData.append("movieIMG", event.target.movieIMG.files[0]);
+    const blob = new Blob([JSONdata], { type: "application/json" });
+    let newfilename = Math.random().toString(36).slice(2);
+    const files = [
+      new File([event.target.movieIMG.files[0]], newfilename),
+      new File([blob], `${newfilename}data`),
+    ];
+    // files.push(event.target.movieIMG.files[0]);
+    const cid = await client.put(files);
+    console.log("stored files with cid:", cid);
 
-    // API endpoint where we send form data.
-    const endpoint = "/api/propose";
-
-    // Form the request for sending data to the server.
-    const options = {
-      // The method is POST because we are sending data.
-      method: "POST",
-      // Tell the server we're sending JSON.
-      // headers: {
-      //   "Content-Type": "multipart/form-data",
-      // },
-      // Body of the request is the JSON data we created above.
-      body: formData,
-    };
-
-    // Send the form data to our forms API on Vercel and get a response.
-    const response = await fetch(endpoint, options);
-
-    // Get the response data from server as JSON.
-    // If server returns the name submitted, that means the form works.
-    const result = await response.json();
-    console.log(result);
     setToastText("Proposing new addition");
     let proposalId = "";
     let proposalState = 1;
-    await propose([result.fileCID], "store", data.name)
+    await propose([cid], "store", data.name)
       .then((value) => {
         console.log("proposed");
         console.log(value);
@@ -75,7 +62,7 @@ export default function Propose() {
     console.log(proposalId, proposalState);
     const prpdata = {
       proposalid: proposalId,
-      cid: result.fileCID,
+      cid: cid,
       state: proposalState,
     };
     const JSONprpdata = JSON.stringify(prpdata);

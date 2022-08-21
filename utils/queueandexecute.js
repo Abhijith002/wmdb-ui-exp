@@ -51,5 +51,5 @@ export async function queueAndExecute(
     descriptionHash
   );
   await executeTx.wait(1);
-  console.log(`wmdb value: ${await wmdb.retrieve()}`);
+  console.log(`wmdb value: ${await wmdb.retrieveAll()}`);
 }

@@ -83,10 +83,11 @@ export default function Vote() {
   };
   const cards = data.map((value, index) => {
     return (
-      <div key={value.proposalID} onClick={() => handleModal(value)}>
+      <div key={value.proposalID}>
         <a
           href="#"
           className="group h-96 block bg-gray-100 rounded-t-lg overflow-hidden relative"
+          onClick={() => handleModal(value)}
         >
           <img
             src={value.imgURL}
@@ -110,7 +111,10 @@ export default function Vote() {
             <span className="text-red-500 text-sm font-medium">
               {value.numVotes.votes}
             </span>
-            {value.numVotes.state == 7 && (
+          </div>
+
+          {value.numVotes.state == 7 && (
+            <div className="flex flex-col items-end">
               <span className="flex items-center text-gray-500 text-sm gap-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -128,9 +132,8 @@ export default function Vote() {
                 </svg>
                 Executed
               </span>
-            )}
-          </div>
-
+            </div>
+          )}
           {value.numVotes.state == 1 && (
             <div className="flex flex-col items-end">
               <span className="text-gray-600 lg:text-lg font-bold">
