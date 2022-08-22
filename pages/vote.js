@@ -134,6 +134,25 @@ export default function Vote() {
               </span>
             </div>
           )}
+          {value.numVotes.state == 3 && (
+            <div className="flex flex-col items-end">
+              <span className="flex items-center text-gray-500 text-sm gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5 text-red-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeLinecap="round"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                >
+                  <path d="M0 0L24 24"></path>
+                  <path d="M24 0L0 24"></path>
+                </svg>
+                Defeated
+              </span>
+            </div>
+          )}
           {value.numVotes.state == 1 && (
             <div className="flex flex-col items-end">
               <span className="text-gray-600 lg:text-lg font-bold">

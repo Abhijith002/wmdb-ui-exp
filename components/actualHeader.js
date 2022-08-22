@@ -1,8 +1,19 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { ethers } from "ethers";
+import { useState } from "react";
 
 export default function ActualHeader() {
   const router = useRouter();
+  const [walletAddress, setWalletAddress] = useState("");
+  const handleWalletConnect = async () => {
+    let provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    signer.getAddress().then((value) => {
+      setWalletAddress(`${value.substring(0, 10)}...`);
+    });
+  };
   return (
     <header className="flex justify-between items-center py-4 md:py-8">
       <Link href="/">
@@ -67,12 +78,19 @@ export default function ActualHeader() {
         </Link>
       </nav>
       <div className="hidden lg:flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-2.5 -ml-8">
-        <a
-          href="#"
-          className="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
-        >
-          Connect Your Wallet
-        </a>
+        {walletAddress == "" ? (
+          <a
+            href="#"
+            className="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+            onClick={handleWalletConnect}
+          >
+            Connect Your Wallet
+          </a>
+        ) : (
+          <div class="inline-block bg-gray-500 border-gray-500 text-sm md:text-base text-white font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">
+            <span>{walletAddress}</span>
+          </div>
+        )}
       </div>
 
       <button
