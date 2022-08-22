@@ -87,7 +87,7 @@ export default function ActualHeader() {
             Connect Your Wallet
           </a>
         ) : (
-          <div class="inline-block bg-gray-500 border-gray-500 text-sm md:text-base text-white font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">
+          <div className="inline-block bg-gray-500 border-gray-500 text-sm md:text-base text-white font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">
             <span>{walletAddress}</span>
           </div>
         )}
