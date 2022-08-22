@@ -1,12 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Governance and WMDB DAO User Interface
+
+This is a front end application for [`WMDB DAO`](https://github.com/Abhijith002/WMDB) an on-chain governance movie database platform.
+
+Check it Out: <https://wmdb-ui-exp.vercel.app>
+
+## Inspiration
+
+In web2 space we have movie platforms like IMDB, TMDB, etc., If the users want to build some custom applications consuming
+data from these platfoms they have to pay for the subscription as the data is owned by the platforms itself.
+What if we have a well maintained (DAO maintained) database that is publicly available? What if the movie promotions can be taken to the next level by generating the NFTs for movie characters/posters? What if the critics get rewarded with tokens for their valuable reviews?
+
+## The Platform
+
+### Features
+
+- Users can propose addition of new movies.
+- The DAO members (Holders of WMDB token) review the proposals and approve/deny based on the quality of data.
+- The succeeded proposal (proposal who got 5% votes) are executed.
+- The new data is added to the WMDB smart contract by the governance contract.
+- ✨Magic ✨
+- The data is availabe for consumption.
+
+## Tech
+
+WMDB is built using number of open source projects:
+
+- [NextJS](https://nextjs.org/) - User Interface
+- [Tailwindcss](https://tailwindcss.com/) - CSS
+- [Framer Motion](https://www.framer.com/motion/) - Animation
+- [Web3.storage](https://web3.storage/) - Web3 file/data storage
+- [AWS DynamoDB](https://aws.amazon.com/dynamodb/) - Data storage for indexing/querying, easy access
+- [Polygon Mumbai](https://polygon.technology/) - Blockchain, Smart Contracts, decentralization
 
 ## Getting Started
 
-First, run the development server:
+1. Clone this repo:
 
-```bash
-npm run dev
-# or
+```
+git clone https://github.com/Abhijith002/WMDB
+cd WMDB
+```
+
+2. Install dependencies
+
+```sh
+yarn
+```
+
+3. Run the development server:
+
+```sh
 yarn dev
 ```
 
@@ -18,17 +61,6 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## Contact
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Abhijith - [@AbhijithGowdar](https://twitter.com/AbhijithGowdar)
